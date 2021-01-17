@@ -3,6 +3,7 @@ import Section from "./components/Section";
 import Input from "./components/Form/Input";
 import Button from "./components/Form/Button";
 import List from "./components/List";
+import styles from "./App.module.css";
 
 export class App extends Component {
   state = {
@@ -28,10 +29,8 @@ export class App extends Component {
       prevState.contacts.find((el, index, arr) => {
         if (el.name === name) {
           arr.splice(index, 1);
-          console.log("ME!");
           return true;
         } else {
-          console.log("Error!!!");
           return false;
         }
       });
@@ -44,18 +43,16 @@ export class App extends Component {
   addContact = (evt) => {
     evt.preventDefault();
     this.setState((prevState) => {
-      console.log(this.state.contacts);
       const name = evt.target.parentElement.children[1].value;
       const number = evt.target.parentElement.children[3].value;
       if (!name) return;
-      const dublicated = this.state.contacts.find((el) => {
+      const dublicated = prevState.contacts.find((el) => {
         if (el.name === name) return true;
         else {
           return false;
         }
       });
-      console.log(dublicated);
-      if (!dublicated === undefined) {
+      if (!(dublicated === undefined)) {
         alert(`You already add ${name}`);
         return;
       } else {
@@ -74,9 +71,9 @@ export class App extends Component {
   };
   render() {
     return (
-      <>
+      <div className={styles.container}>
         <h1>Phonebook</h1>
-        <Section title={null}>
+        <Section>
           <Input name="name" />
           <Input name="number" />
           <Button text="Add contact" addContact={this.addContact} />
@@ -91,7 +88,7 @@ export class App extends Component {
             />
           </Section>
         )}
-      </>
+      </div>
     );
   }
 }

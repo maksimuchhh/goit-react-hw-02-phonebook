@@ -15,9 +15,11 @@ export class Input extends Component {
   };
   render() {
     const { name, changeInput } = this.props;
+    const arr = [...name];
+    arr.splice(0, 1, arr[0].toUpperCase());
     return (
       <>
-        <label htmlFor={name}>{name}</label>
+        <label htmlFor={name}>{arr}</label>
         <input
           onChange={name === "filter" ? changeInput : this.changeInput}
           type="text"
