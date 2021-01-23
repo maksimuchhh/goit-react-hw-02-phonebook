@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const index = ({ text, addContact, deleteContact }) => {
+const Button = ({ text, deleteContact }) => {
   return (
     <>
-      <button onClick={text === "Delete" ? deleteContact : addContact}>
+      <button onClick={deleteContact ? deleteContact : null} type="submit">
         {text}
       </button>
     </>
   );
 };
 
-index.propTypes = {
+Button.propTypes = {
   text: PropTypes.string,
 };
 
-export default index;
+export default Button;

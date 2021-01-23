@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Section from "./components/Section";
 import Input from "./components/Form/Input";
-import Button from "./components/Form/Button";
+import Form from "./components/Form";
 import List from "./components/List";
 import styles from "./App.module.css";
 
@@ -40,17 +40,15 @@ export class App extends Component {
       };
     });
   };
-  addContact = (evt) => {
+
+  addContact = (evt, state) => {
     evt.preventDefault();
     this.setState((prevState) => {
-      const name = evt.target.parentElement.children[1].value;
-      const number = evt.target.parentElement.children[3].value;
+      const name = state.name;
+      const number = state.number;
       if (!name) return;
       const dublicated = prevState.contacts.find((el) => {
-        if (el.name === name) return true;
-        else {
-          return false;
-        }
+        return el.name === name;
       });
       if (!(dublicated === undefined)) {
         alert(`You already add ${name}`);
@@ -73,14 +71,10 @@ export class App extends Component {
     return (
       <div className={styles.container}>
         <h1>Phonebook</h1>
-        <Section>
-          <Input name="name" />
-          <Input name="number" />
-          <Button text="Add contact" addContact={this.addContact} />
-        </Section>
+        <Form addContact={this.addContact} />
         {this.state.contacts.length > 0 && (
           <Section title="Contacts">
-            <Input name="filter" changeInput={this.changeInput} />
+            <Input name="filter" changeInputForFilter={this.changeInput} />
             <List
               contacts={this.state.contacts}
               filter={this.state.filter}
