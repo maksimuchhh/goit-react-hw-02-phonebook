@@ -24,9 +24,8 @@ export class App extends Component {
       };
     });
   };
-  deleteContact = (evt) => {
+  deleteContact = (idOfEl) => {
     this.setState((prevState) => {
-      const idOfEl = evt.target.id;
       prevState.contacts.find((el, index, arr) => {
         if (el.id === idOfEl) {
           arr.splice(index, 1);

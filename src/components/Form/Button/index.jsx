@@ -6,7 +6,7 @@ const Button = ({ text, deleteContact, id }) => {
     <>
       <button
         id={deleteContact ? id : null}
-        onClick={deleteContact ? deleteContact : null}
+        onClick={deleteContact ? () => deleteContact(id) : null}
         type="submit"
       >
         {text}
