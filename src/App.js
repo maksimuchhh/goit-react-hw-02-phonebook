@@ -4,6 +4,7 @@ import Input from "./components/Form/Input";
 import Form from "./components/Form";
 import List from "./components/List";
 import styles from "./App.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 export class App extends Component {
   state = {
@@ -25,9 +26,9 @@ export class App extends Component {
   };
   deleteContact = (evt) => {
     this.setState((prevState) => {
-      const name = evt.target.parentElement.children[0].textContent;
+      const idOfEl = evt.target.id;
       prevState.contacts.find((el, index, arr) => {
-        if (el.name === name) {
+        if (el.id === idOfEl) {
           arr.splice(index, 1);
           return true;
         } else {
@@ -42,8 +43,10 @@ export class App extends Component {
   };
 
   addContact = (evt, state) => {
+    console.log(this.state);
     evt.preventDefault();
     this.setState((prevState) => {
+      const id = uuidv4();
       const name = state.name;
       const number = state.number;
       if (!name) return;
@@ -59,6 +62,7 @@ export class App extends Component {
           contacts: [
             ...prevState.contacts,
             {
+              id: id,
               name: name,
               number: number,
             },

@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = ({ text, deleteContact }) => {
+const Button = ({ text, deleteContact, id }) => {
   return (
     <>
-      <button onClick={deleteContact ? deleteContact : null} type="submit">
+      <button
+        id={deleteContact ? id : null}
+        onClick={deleteContact ? deleteContact : null}
+        type="submit"
+      >
         {text}
       </button>
     </>

@@ -11,11 +11,10 @@ const List = ({ contacts, filter, deleteContact }) => {
   return (
     <ul>
       {contacts.map((el) => {
-        const id = uuidv4();
         return (
-          <li key={id}>
+          <li key={el.id}>
             <span>{el.name}</span>: <span>{el.number} </span>
-            <Button deleteContact={deleteContact} text="Delete" />
+            <Button deleteContact={deleteContact} text="Delete" id={el.id} />
           </li>
         );
       })}
